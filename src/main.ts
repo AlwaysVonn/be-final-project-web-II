@@ -7,6 +7,10 @@ async function bootstrap() {
   const server = express();
   const app = await NestFactory.create(AppModule, new ExpressAdapter(server));
   await app.init();
+  app.enableCors({
+    origin: ['http://localhost:3000', 'https://self-management-xi.vercel.app/'],
+    credentials: true,
+  });
   server.listen(3000, () => console.log('Server running...'));
 }
 bootstrap();
